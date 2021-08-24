@@ -14,6 +14,7 @@ import hudson.model.Descriptor;
 import hudson.util.FormValidation;
 
 import org.apache.commons.lang.StringUtils;
+import org.jenkinsci.Symbol;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.export.Exported;
@@ -56,6 +57,7 @@ public class KeyValuePair extends AbstractDescribableImpl<KeyValuePair> {
    * @author Scott DeWitt (sdewitt@newrelic.com)
    */
   @Extension
+  @Symbol("keyValuePair")
   public static final class KeyValuePairDescriptorImpl extends Descriptor<KeyValuePair> {
 
     @Override

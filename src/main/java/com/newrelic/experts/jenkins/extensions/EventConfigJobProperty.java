@@ -16,15 +16,18 @@ import hudson.model.JobProperty;
 
 import jenkins.model.OptionalJobProperty;
 
+import org.jenkinsci.Symbol;
 import org.kohsuke.stapler.DataBoundConstructor;
+import org.kohsuke.stapler.DataBoundSetter;
 import org.kohsuke.stapler.export.Exported;
 import org.kohsuke.stapler.export.ExportedBean;
 
 import java.util.List;
+import javax.annotation.CheckForNull;
 
 /**
  * Definition of an optional {@link JobProperty} for New Relic configuration.
- * 
+ *
  * @author Scott DeWitt (sdewitt@newrelic.com)
  */
 @ExportedBean
@@ -34,25 +37,30 @@ public class EventConfigJobProperty extends OptionalJobProperty<Job<?,?>> {
   private List<KeyValuePair> customAttributes;
   
   @DataBoundConstructor
-  public EventConfigJobProperty(
-      boolean disableAppBuildEvents,
-      List<KeyValuePair> customAttributes
-  ) {
-    this.disableAppBuildEvents = disableAppBuildEvents;
-    this.customAttributes = customAttributes;
-  }
-  
+  public EventConfigJobProperty() {}
+
   @Exported
   public boolean isDisableAppBuildEvents() {
     return disableAppBuildEvents;
+  }
+
+  @DataBoundSetter
+  public void setDisableAppBuildEvents(boolean disableAppBuildEvents) {
+    this.disableAppBuildEvents = disableAppBuildEvents;
   }
 
   @Exported
   public List<KeyValuePair> getCustomAttributes() {
     return this.customAttributes;
   }
-  
+
+  @DataBoundSetter
+  public void setCustomAttributes(@CheckForNull List<KeyValuePair> customAttributes) {
+    this.customAttributes = customAttributes;
+  }
+
   @Extension(ordinal = -1000)
+  @Symbol("newRelic")
   public static final class DescriptorImpl extends OptionalJobPropertyDescriptor {
     
     private EventHelper eventHelper;

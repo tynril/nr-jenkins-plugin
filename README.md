@@ -236,6 +236,28 @@ SELECT average(buildDelay) FROM AppBuildEvent
 SELECT buildMessage FROM AppBuildEvent LIMIT 50
 ```
 
+## Usage in pipeline
+This plugin may be used in a Jenkinsfile, as such:
+```
+pipeline {
+   options {
+      newRelic(
+         disableAppBuildEvents: false,
+         customAttributes: [
+            keyValuePair(name: 'customAttributeName', value: 'Custom value.'),
+         ]
+      )
+
+      // (...)
+   }
+
+   // (...)
+}
+```
+
+Both arguments are optional, with `disableAppBuildEvents` defaulting to `false`,
+and `customAttributes` defaulting to an empty list.
+
 ## Troubleshooting
 To troubleshoot issues, the first steps is creating a new Jenkins logger to
 view the New Relic Jenkins logs.  This is accomplished as follows.
