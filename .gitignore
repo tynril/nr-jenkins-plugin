@@ -31,6 +31,9 @@ hs_err_pid*
 /target/
 /work/
 
+# IntelliJ
+.idea
+
 # Maven
 pom.xml.tag
 pom.xml.releaseBackup
