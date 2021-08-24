@@ -104,6 +104,21 @@ To customize global custom attributes, perform the following steps.
 1. Optionally add any Global Custom Attribute as desired
 1. Click on the button labeled "Save"
 
+### Support for Configuration as Code
+The New Relic Jenkins Plugin optionally supports the Configuration-as-Code
+plugin. Configuration may be expressed with this additional plugin as follow:
+
+```
+unclassified:
+  newRelicGlobalConfiguration:
+    insightsInsertCredentialsId: "insights-insert-credentials-identifier-here"
+    systemSampleInterval: 15
+    eventHarvestInterval: 60
+    globalCustomAttributes:
+    - name: "myGlobalCustomAttributeName"
+      value: "Some value."
+```
+
 ### Dashboards
 Once installed and configured, the New Relic Jenkins Plugin will immediately
 start sending build events for all builds in Jenkins to Insights.  Build events
