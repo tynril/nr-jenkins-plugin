@@ -92,6 +92,18 @@ To customize the collection intervals, perform the following steps.
 1. Optionally enter a new value for the system metric sample interval in the field labeled "System Metric Sample Interval"  
 1. Click on the button labeled "Save"
 
+### Setup global custom attributes
+The New Relic Jenkins Plugin can be customized to add custom attributes to all
+events produced by a specific Jenkins instance.
+
+To customize global custom attributes, perform the following steps.
+
+1. Login to your Jenkins server as an administrator
+1. Navigate to `/jenkins/configure`
+1. Scroll down to the section labeled "New Relic"
+1. Optionally add any Global Custom Attribute as desired
+1. Click on the button labeled "Save"
+
 ### Dashboards
 Once installed and configured, the New Relic Jenkins Plugin will immediately
 start sending build events for all builds in Jenkins to Insights.  Build events

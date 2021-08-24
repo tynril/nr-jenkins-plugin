@@ -41,6 +41,7 @@ public class NewRelicGlobalConfiguration extends GlobalConfiguration {
   private String insightsInsertCredentialsId = null;
   private int eventHarvestInterval = 60;
   private int systemSampleInterval = 15;
+  private List<KeyValuePair> globalCustomAttributes = null;
   private EventHelper eventHelper;
 
   /**
@@ -69,6 +70,7 @@ public class NewRelicGlobalConfiguration extends GlobalConfiguration {
     super();
     
     this.eventHelper = eventHelper;
+    this.eventHelper.setGlobalConfiguration(this);
     
     load();
   }
@@ -117,6 +119,14 @@ public class NewRelicGlobalConfiguration extends GlobalConfiguration {
 
   public void setSystemSampleInterval(int systemSampleInterval) {
     this.systemSampleInterval = systemSampleInterval;
+  }
+
+  public List<KeyValuePair> getGlobalCustomAttributes() {
+    return globalCustomAttributes;
+  }
+
+  public void setGlobalCustomAttributes(List<KeyValuePair> globalCustomAttributes) {
+    this.globalCustomAttributes = globalCustomAttributes;
   }
 
   /**

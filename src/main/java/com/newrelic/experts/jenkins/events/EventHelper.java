@@ -4,6 +4,8 @@ import com.google.inject.Singleton;
 
 import com.newrelic.experts.client.model.Event;
 
+import com.newrelic.experts.jenkins.extensions.KeyValuePair;
+import com.newrelic.experts.jenkins.extensions.NewRelicGlobalConfiguration;
 import hudson.model.Computer;
 import hudson.model.Node;
 import hudson.model.labels.LabelAtom;
@@ -33,6 +35,12 @@ public class EventHelper {
    * In-memory list for buffering events during the harvest cycle.
    */
   private List<Event> events = new ArrayList<Event>();
+
+  private NewRelicGlobalConfiguration nrjConfig;
+
+  public void setGlobalConfiguration(NewRelicGlobalConfiguration nrjConfig) {
+    this.nrjConfig = nrjConfig;
+  }
 
   /**
    * Assign any node labels to {@code attributeName} in {@code event}.
@@ -71,7 +79,25 @@ public class EventHelper {
       }
     }
   }
-  
+
+  /**
+   * Assign all global custom attributes in {@code event}.
+   *
+   * @param event the event.
+   */
+  public void setGlobalCustomAttributes(Event event) {
+    if (nrjConfig != null) {
+      List<KeyValuePair> globalCustomAttributes = nrjConfig.getGlobalCustomAttributes();
+      if (globalCustomAttributes != null) {
+        for (KeyValuePair entry : globalCustomAttributes) {
+          if (entry != null && entry.getName() != null && entry.getValue() != null) {
+            event.put(entry.getName(), entry.getValue());
+          }
+        }
+      }
+    }
+  }
+
   /**
    * Set common Jenkins attributes on the event.
    * 
@@ -85,6 +111,7 @@ public class EventHelper {
     event.put("providerVersion", (ver != null ? ver.toString() : "unknown"));
     setLabels(event, "jenkinsMasterLabels", jenkins);
     setHostname(event, "jenkinsMasterHost", jenkins);
+    setGlobalCustomAttributes(event);
   }
   
   /**

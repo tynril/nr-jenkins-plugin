@@ -128,6 +128,7 @@ public class AppBuildEventProducer {
     event.put("buildAgentDesc", buildAgent.getNodeDescription());
     this.eventHelper.setLabels(event, "buildAgentLabels", buildAgent);
     this.eventHelper.setHostname(event, "buildAgentHost", buildAgent);
+    this.eventHelper.setGlobalCustomAttributes(event);
     setCustomAttributes(event, job, build, listener);
     
     this.eventHelper.recordEvent(event);
