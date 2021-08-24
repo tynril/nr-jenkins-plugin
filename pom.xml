@@ -15,7 +15,7 @@
 	</parent>
 	<groupId>com.newrelic.jenkins</groupId>
 	<artifactId>new-relic</artifactId>
-	<version>1.0.4</version>
+	<version>1.0.5</version>
 	<properties>
     <findbugs.skip>true</findbugs.skip>
     <spotbugs.skip>true</spotbugs.skip>
